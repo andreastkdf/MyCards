@@ -1,9 +1,10 @@
 import React, { Component } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native"
 import { connect } from "react-redux"
 import { getDecks } from "../utils/api"
 import { receiveDecks } from "../actions"
 import DeckSummary from "./DeckSummary"
+import DeckDetails from "./DeckDetails"
 
 class DeckList extends Component {
   componentDidMount() {
@@ -19,13 +20,14 @@ class DeckList extends Component {
 
     return (
       <View>
-        {Object.keys(decks).map(title => {
+        {/* {Object.keys(decks).map(title => {
           return (
-            <View key={title}>
+            <TouchableOpacity key={title}>
               <DeckSummary deck={decks[title]} />
-            </View>
+            </TouchableOpacity>
           )
-        })}
+        })} */}
+        <DeckDetails deck={decks.React} />
       </View>
     )
   }
