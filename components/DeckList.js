@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native"
 import { connect } from "react-redux"
 import { getDecks } from "../utils/api"
 import { receiveDecks } from "../actions"
+import DeckSummary from "./DeckSummary"
 
 class DeckList extends Component {
   componentDidMount() {
@@ -18,7 +19,13 @@ class DeckList extends Component {
 
     return (
       <View>
-        <Text>{JSON.stringify(decks)}</Text>
+        {Object.keys(decks).map(title => {
+          return (
+            <View key={title}>
+              <DeckSummary deck={decks[title]} />
+            </View>
+          )
+        })}
       </View>
     )
   }
@@ -26,7 +33,8 @@ class DeckList extends Component {
 
 const mapStateToProps = decks => {
   return {
-    decks
+    decks,
+    totalDecks: Object.keys(decks).length
   }
 }
 

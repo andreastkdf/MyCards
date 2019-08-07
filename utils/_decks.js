@@ -1,4 +1,5 @@
 import { AsyncStorage } from "react-native"
+import { materialColor } from "./colors"
 
 export const DECKS_STORAGE_KEY = "MyCards:decks"
 
@@ -15,7 +16,8 @@ export const setDummyData = () => {
           question: "Where do you make Ajax requests in React?",
           answer: "The componentDidMount lifecycle event"
         }
-      ]
+      ],
+      color: materialColor()
     },
     JavaScript: {
       title: "JavaScript",
@@ -25,10 +27,29 @@ export const setDummyData = () => {
           answer:
             "The combination of a function and the lexical environment within which that function was declared."
         }
-      ]
+      ],
+      color: materialColor()
+    },
+    Systems: {
+      title: "Systems",
+      questions: [
+        {
+          question: "What is Orbis?",
+          answer: "lol"
+        },
+        {
+          question: "What is brain?",
+          answer: "Drupal don't hurt me."
+        }
+      ],
+      color: materialColor()
     }
   }
-  AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(dummyData))
+  AsyncStorage.removeItem(DECKS_STORAGE_KEY)
+    .catch(error => console.warn("error", error))
+    .then(() => {
+      AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(dummyData))
+    })
 
   return dummyData
 }
