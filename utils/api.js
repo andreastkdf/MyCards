@@ -4,6 +4,7 @@ import { setDummyData, DECKS_STORAGE_KEY } from "./_decks"
 export const getDecks = () => {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(results => {
     return results === null ? setDummyData() : JSON.parse(results)
+    // return setDummyData()
   })
 }
 
