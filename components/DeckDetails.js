@@ -1,7 +1,7 @@
 import React from "react"
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { pink, gray, blue, white, green } from "../utils/colors"
-import { MaterialIcons, Ionicons } from "@expo/vector-icons"
+import { MaterialIcons } from "@expo/vector-icons"
 
 const DeckDetails = ({ deck }) => {
   return (

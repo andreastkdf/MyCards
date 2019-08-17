@@ -7,6 +7,7 @@ import { AppLoading } from "expo"
 import DeckSummary from "./DeckSummary"
 import DeckDetails from "./DeckDetails"
 import AddCard from "./AddCard"
+import Quiz from "./Quiz"
 
 class DeckList extends Component {
   state = {
@@ -45,8 +46,9 @@ class DeckList extends Component {
               </TouchableOpacity>
             )
           })} */}
-          {/* <DeckDetails deck={decks.Systems} /> */}
-          <AddCard deckTitle="Systems" deckColor={decks.Systems.color} />
+          {/* <DeckDetails deck={decks.React} /> */}
+          {/* <AddCard deckTitle="Systems" deckColor={decks.Systems.color} /> */}
+          <Quiz deck={decks.React} />
         </View>
       )
     }
