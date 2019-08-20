@@ -1,4 +1,5 @@
-import { RECEIVE_DECKS, ADD_DECK } from "../actions/index"
+import { RECEIVE_DECKS, ADD_DECK, ADD_CARD } from "../actions/index"
+import DeckList from "../components/DeckList"
 
 const decks = (state = {}, action) => {
   switch (action.type) {
@@ -9,9 +10,8 @@ const decks = (state = {}, action) => {
       }
     case ADD_DECK:
       const { title, color } = action
-      let decks = {}
 
-      decks = {
+      return {
         ...state,
         [title]: {
           title: title,
@@ -19,11 +19,24 @@ const decks = (state = {}, action) => {
           questions: []
         }
       }
+    case ADD_CARD:
+      const { card, deckTitle } = action
+
+      let decks = {}
+
+      decks = {
+        ...state,
+        [deckTitle]: {
+          ...state[deckTitle],
+          questions: state[deckTitle].questions.concat(card)
+        }
+      }
 
       return {
         ...state,
         ...decks
       }
+
     default:
       return state
   }
