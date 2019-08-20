@@ -5,6 +5,7 @@ import { Provider } from "react-redux"
 import reducer from "./reducers"
 import DeckList from "./components/DeckList"
 import { white } from "./utils/colors"
+import middleware from "./middleware"
 
 const styles = StyleSheet.create({
   container: {
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={createStore(reducer, middleware)}>
         <View style={styles.container}>
           <DeckList />
         </View>

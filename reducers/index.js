@@ -8,9 +8,21 @@ const decks = (state = {}, action) => {
         ...action.decks
       }
     case ADD_DECK:
+      const { title, color } = action
+      let decks = {}
+
+      decks = {
+        ...state,
+        [title]: {
+          title: title,
+          color: color,
+          questions: []
+        }
+      }
+
       return {
         ...state,
-        ...action.title
+        ...decks
       }
     default:
       return state

@@ -7,6 +7,7 @@ import { AppLoading } from "expo"
 import DeckSummary from "./DeckSummary"
 import DeckDetails from "./DeckDetails"
 import AddCard from "./AddCard"
+import AddDeck from "./AddDeck"
 import Quiz from "./Quiz"
 
 class DeckList extends Component {
@@ -48,7 +49,8 @@ class DeckList extends Component {
           })} */}
           {/* <DeckDetails deck={decks.React} /> */}
           {/* <AddCard deckTitle="Systems" deckColor={decks.Systems.color} /> */}
-          <Quiz deck={decks.React} />
+          {/* <Quiz deck={decks.React} /> */}
+          <AddDeck />
         </View>
       )
     }

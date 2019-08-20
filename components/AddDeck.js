@@ -1,12 +1,15 @@
 import React, { Component } from "React"
 import {
-  StyleSheet,
   Text,
   View,
+  StyleSheet,
   TextInput,
   TouchableOpacity
 } from "react-native"
-import { purple, white } from "../utils/colors"
+import { purple, white, pink, materialColor } from "../utils/colors"
+import { submitDeck } from "../utils/api"
+import { connect } from "react-redux"
+import { addDeck } from "../actions"
 
 const SubmitButton = ({ onPress }) => {
   return (
@@ -16,33 +19,31 @@ const SubmitButton = ({ onPress }) => {
   )
 }
 
-export default class AddCard extends Component {
+class AddDeck extends Component {
   constructor(props) {
     super(props)
-    this.state = { question: "", answer: "" }
+    this.state = { title: "", color: materialColor() }
+  }
+
+  submit = () => {
+    const { title, color } = this.state
+
+    this.props.dispatch(addDeck(title, color))
   }
 
   render() {
-    const { deckTitle, deckColor } = this.props
-
     return (
-      <View style={[styles.container, { backgroundColor: deckColor }]}>
+      <View style={[styles.container, { backgroundColor: this.state.color }]}>
+        <Text style={styles.description}>
+          What is the title of your new deck?
+        </Text>
         <TextInput
-          multiline={true}
+          multiline={false}
           numberOfLines={3}
           style={styles.input}
-          onChangeText={question => this.setState({ question })}
-          value={this.state.question}
-          placeholder={"Add a question"}
-          placeholderTextColor={purple}
-        />
-        <TextInput
-          multiline={true}
-          numberOfLines={3}
-          style={styles.input}
-          onChangeText={answer => this.setState({ answer })}
-          value={this.state.answer}
-          placeholder={"Add the answer"}
+          onChangeText={title => this.setState({ title })}
+          value={this.state.title}
+          placeholder={"Deck Title"}
           placeholderTextColor={purple}
         />
         <SubmitButton onPress={this.submit} />
@@ -58,12 +59,18 @@ const styles = StyleSheet.create({
     padding: 10,
     height: "100%"
   },
+  description: {
+    fontSize: 25,
+    margin: 10
+  },
   input: {
     height: 80,
     margin: 10,
     fontSize: 22,
-    backgroundColor: white,
-    opacity: 0.7
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderColor: pink,
+    borderRadius: 6
   },
   androidSubmitButton: {
     backgroundColor: purple,
@@ -81,3 +88,5 @@ const styles = StyleSheet.create({
     textAlign: "center"
   }
 })
+
+export default connect()(AddDeck)
