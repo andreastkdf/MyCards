@@ -6,24 +6,51 @@ import {
   TextInput,
   TouchableOpacity
 } from "react-native"
+import { connect } from "react-redux"
+import { addCard } from "../actions"
+import { submitCard } from "../utils/api"
 import { purple, white } from "../utils/colors"
 
-const SubmitButton = ({ onPress }) => {
+const SubmitButton = ({ onPress, disabled }) => {
   return (
-    <TouchableOpacity style={styles.androidSubmitButton} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.androidSubmitButton, disabled && styles.disabled]}
+      onPress={onPress}
+      disabled={disabled}
+    >
       <Text style={styles.submitBtnText}>SUBMIT</Text>
     </TouchableOpacity>
   )
 }
 
-export default class AddCard extends Component {
+class AddCard extends Component {
   constructor(props) {
     super(props)
-    this.state = { question: "", answer: "" }
+    this.state = {
+      question: "",
+      answer: "",
+      deckTitle: this.props.deckTitle
+    }
+  }
+
+  submit = () => {
+    const { question, answer, deckTitle } = this.state
+    const card = { question, answer }
+
+    //  Reset state
+    this.setState(() => ({
+      question: "",
+      answer: ""
+    }))
+
+    // Save card in local storage
+    submitCard(card, deckTitle)
+
+    this.props.dispatch(addCard(card, deckTitle))
   }
 
   render() {
-    const { deckTitle, deckColor } = this.props
+    const { deckColor } = this.props
 
     return (
       <View style={[styles.container, { backgroundColor: deckColor }]}>
@@ -45,7 +72,10 @@ export default class AddCard extends Component {
           placeholder={"Add the answer"}
           placeholderTextColor={purple}
         />
-        <SubmitButton onPress={this.submit} />
+        <SubmitButton
+          onPress={this.submit}
+          disabled={this.state.question === "" || this.state.answer === ""}
+        />
       </View>
     )
   }
@@ -75,9 +105,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
+  disabled: {
+    opacity: 0.5
+  },
   submitBtnText: {
     color: white,
     fontSize: 22,
     textAlign: "center"
   }
 })
+
+export default connect()(AddCard)

@@ -16,6 +16,7 @@ export const getDeck = id => {
 }
 
 export const submitDeck = deck => {
+  // Init questions
   deck.questions = []
   return AsyncStorage.mergeItem(
     DECKS_STORAGE_KEY,
@@ -25,4 +26,15 @@ export const submitDeck = deck => {
   )
 }
 
-// TODO: Add call to addCardToDeck
+export const submitCard = (card, id) => {
+  getDeck(id).then(deck => {
+    deck.questions = deck.questions.concat(card)
+
+    return AsyncStorage.mergeItem(
+      DECKS_STORAGE_KEY,
+      JSON.stringify({
+        [id]: deck
+      })
+    )
+  })
+}
