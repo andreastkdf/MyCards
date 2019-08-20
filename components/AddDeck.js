@@ -6,14 +6,18 @@ import {
   TextInput,
   TouchableOpacity
 } from "react-native"
-import { purple, white, pink, materialColor } from "../utils/colors"
 import { submitDeck } from "../utils/api"
 import { connect } from "react-redux"
 import { addDeck } from "../actions"
+import { purple, white, pink, materialColor } from "../utils/colors"
 
-const SubmitButton = ({ onPress }) => {
+const SubmitButton = ({ onPress, disabled }) => {
   return (
-    <TouchableOpacity style={styles.androidSubmitButton} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.androidSubmitButton, disabled && styles.disabled]}
+      onPress={onPress}
+      disabled={disabled}
+    >
       <Text style={styles.submitBtnText}>SUBMIT</Text>
     </TouchableOpacity>
   )
@@ -28,6 +32,7 @@ class AddDeck extends Component {
   submit = () => {
     const deck = this.state
 
+    // Reset state
     this.setState(() => ({
       title: "",
       color: materialColor()
@@ -54,7 +59,10 @@ class AddDeck extends Component {
           placeholder={"Deck Title"}
           placeholderTextColor={purple}
         />
-        <SubmitButton onPress={this.submit} />
+        <SubmitButton
+          onPress={this.submit}
+          disabled={this.state.title === ""}
+        />
       </View>
     )
   }
@@ -89,6 +97,9 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     justifyContent: "center",
     alignItems: "center"
+  },
+  disabled: {
+    opacity: 0.5
   },
   submitBtnText: {
     color: white,
