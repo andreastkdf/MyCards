@@ -26,9 +26,17 @@ class AddDeck extends Component {
   }
 
   submit = () => {
-    const { title, color } = this.state
+    const deck = this.state
 
-    this.props.dispatch(addDeck(title, color))
+    this.setState(() => ({
+      title: "",
+      color: materialColor()
+    }))
+
+    // Save deck in local storage
+    submitDeck(deck)
+
+    this.props.dispatch(addDeck(deck))
   }
 
   render() {

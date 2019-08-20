@@ -15,11 +15,12 @@ export const getDeck = id => {
   })
 }
 
-export const submitDeck = ({ title, id }) => {
+export const submitDeck = deck => {
+  deck.questions = []
   return AsyncStorage.mergeItem(
     DECKS_STORAGE_KEY,
     JSON.stringify({
-      [id]: title
+      [deck.title]: deck
     })
   )
 }

@@ -10,7 +10,7 @@ export const receiveDecks = decks => {
 }
 
 // Add deck action creator
-export const addDeck = (title, color) => {
+export const addDeck = ({ title, color }) => {
   return {
     type: ADD_DECK,
     title,
