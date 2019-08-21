@@ -50,10 +50,6 @@ class DeckList extends Component {
               </TouchableOpacity>
             )
           })}
-          {/* <DeckDetails deck={decks.Systems} /> */}
-          {/* <AddCard deckTitle="Systems" deckColor={decks.Systems.color} /> */}
-          {/* <Quiz deck={decks.Systems} /> */}
-          {/* <AddDeck /> */}
         </ScrollView>
       )
     }

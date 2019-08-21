@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { connect } from "react-redux"
 import { MaterialIcons } from "@expo/vector-icons"
 import { gray, blue, white, green } from "../utils/colors"
+import { clearLocalNotification, setLocalNotification } from "../utils/helpers"
 
 class DeckDetails extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -42,6 +43,7 @@ class DeckDetails extends Component {
           <TouchableOpacity
             style={styles.start}
             onPress={() => {
+              clearLocalNotification().then(setLocalNotification)
               this.props.navigation.navigate("Quiz", {
                 deck: deck
               })

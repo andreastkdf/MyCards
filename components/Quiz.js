@@ -8,8 +8,8 @@ import {
 } from "react-native"
 import { MaterialIcons } from "@expo/vector-icons"
 import { connect } from "react-redux"
-import { white, green, red } from "../utils/colors"
 import { NavigationActions } from "react-navigation"
+import { white, green, red } from "../utils/colors"
 
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => {

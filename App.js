@@ -24,7 +24,8 @@ import AddDeck from "./components/AddDeck"
 import AddCard from "./components/AddCard"
 import DeckDetails from "./components/DeckDetails"
 import Quiz from "./components/Quiz"
-import { purple, white, materialColor } from "./utils/colors"
+import { purple, white } from "./utils/colors"
+import { setLocalNotification } from "./utils/helpers"
 
 const FlashCardsStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -127,6 +128,9 @@ const styles = StyleSheet.create({
 })
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={createStore(reducer, middleware)}>
