@@ -42,10 +42,9 @@ export const setLocalNotification = () => {
             Notifications.cancelAllScheduledNotificationsAsync()
 
             let tomorrow = new Date()
-            // TODO: Change to tomorrow before submitting
-            tomorrow.setDate(tomorrow.getDate())
-            tomorrow.setHours(16)
-            tomorrow.setMinutes(5)
+            tomorrow.setDate(tomorrow.getDate() + 1)
+            tomorrow.setHours(10)
+            tomorrow.setMinutes(30)
 
             Notifications.scheduleLocalNotificationAsync(createNotification(), {
               time: tomorrow,
