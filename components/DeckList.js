@@ -1,13 +1,10 @@
 import React, { Component } from "react"
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native"
+import { StyleSheet, Text, ScrollView, TouchableOpacity } from "react-native"
 import { connect } from "react-redux"
 import { getDecks } from "../utils/api"
 import { receiveDecks } from "../actions"
 import { AppLoading } from "expo"
 import DeckSummary from "./DeckSummary"
-import DeckDetails from "./DeckDetails"
-import AddCard from "./AddCard"
-import Quiz from "./Quiz"
 
 class DeckList extends Component {
   state = {
@@ -38,18 +35,26 @@ class DeckList extends Component {
 
     if (decks) {
       return (
-        <View>
-          {/* {Object.keys(decks).map(title => {
+        <ScrollView>
+          {Object.keys(decks).map(title => {
             return (
-              <TouchableOpacity key={title}>
+              <TouchableOpacity
+                key={title}
+                onPress={() =>
+                  this.props.navigation.navigate("DeckDetails", {
+                    title: title
+                  })
+                }
+              >
                 <DeckSummary deck={decks[title]} />
               </TouchableOpacity>
             )
-          })} */}
-          {/* <DeckDetails deck={decks.React} /> */}
+          })}
+          {/* <DeckDetails deck={decks.Systems} /> */}
           {/* <AddCard deckTitle="Systems" deckColor={decks.Systems.color} /> */}
-          <Quiz deck={decks.React} />
-        </View>
+          {/* <Quiz deck={decks.Systems} /> */}
+          {/* <AddDeck /> */}
+        </ScrollView>
       )
     }
   }

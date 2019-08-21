@@ -6,10 +6,20 @@ import {
   StyleSheet,
   Animated
 } from "react-native"
-import { white, green, red } from "../utils/colors"
 import { MaterialIcons } from "@expo/vector-icons"
+import { connect } from "react-redux"
+import { white, green, red } from "../utils/colors"
+import { NavigationActions } from "react-navigation"
 
-export default class Quiz extends Component {
+class Quiz extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { title } = navigation.state.params.deck
+
+    return {
+      title: title + " Quiz"
+    }
+  }
+
   componentWillMount() {
     this.animatedValue = new Animated.Value(0)
     this.value = 0
@@ -91,7 +101,18 @@ export default class Quiz extends Component {
     const { questionNo, result } = this.state
     const questionsTotal = questions.length
 
-    if (questionNo + 1 > questionsTotal) {
+    if (questionsTotal == 0) {
+      return (
+        <View
+          style={[styles.container, styles.center, { backgroundColor: color }]}
+        >
+          <Text style={{ fontSize: 20, textAlign: "center" }}>
+            🙁Sorry, you cannot take the a quiz because there are no cards in
+            the deck. Go back to the deck and create some cards!
+          </Text>
+        </View>
+      )
+    } else if (questionNo + 1 > questionsTotal) {
       // Quiz completed
       return (
         <View
@@ -106,6 +127,11 @@ export default class Quiz extends Component {
           <TouchableOpacity onPress={() => this.resetQuiz()}>
             <Text style={{ fontSize: 20, color: red, textAlign: "center" }}>
               Re-start the quiz
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.goBack()}>
+            <Text style={{ fontSize: 20, color: red, textAlign: "center" }}>
+              Back to the deck
             </Text>
           </TouchableOpacity>
         </View>
@@ -191,6 +217,15 @@ export default class Quiz extends Component {
   }
 }
 
+const mapStateToProps = (state, { navigation }) => {
+  const { deck } = navigation.state.params
+
+  return {
+    deck,
+    goBack: () => navigation.goBack()
+  }
+}
+
 const styles = StyleSheet.create({
   container: {
     height: "100%"
@@ -203,7 +238,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     padding: 30,
-    height: 430,
+    height: 630,
     width: 430,
     justifyContent: "center",
     backgroundColor: white,
@@ -238,3 +273,5 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 })
+
+export default connect(mapStateToProps)(Quiz)

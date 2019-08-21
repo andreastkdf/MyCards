@@ -30,16 +30,12 @@ export const setDummyData = () => {
       ],
       color: materialColor()
     },
-    Systems: {
-      title: "Systems",
+    Web: {
+      title: "Web",
       questions: [
         {
-          question: "What is Orbis?",
-          answer: "lol"
-        },
-        {
-          question: "What is brain?",
-          answer: "Drupal don't hurt me."
+          question: "What is Drupal?",
+          answer: "A Content Management System"
         }
       ],
       color: materialColor()
