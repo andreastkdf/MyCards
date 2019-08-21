@@ -36,13 +36,6 @@ yarn start
 # Download the Expo app for Android.
 You can select to run the app on your phone or emulator.
 
-## Production build
-```bash
-cd MyCards
-yarn install
-exp build:android
-```
-
 ## Create React Native App
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app)
