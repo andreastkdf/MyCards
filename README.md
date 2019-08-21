@@ -26,7 +26,7 @@ sudo apt-get update && sudo apt-get install yarn
 * Windows : 
 [Installation page](https://yarnpkg.com/lang/en/docs/install/#windows-stable)
 
-## Start MyCards from your workspace:
+## Start MyCards from your dev workspace:
  
 ```bash
 cd MyCards
@@ -35,6 +35,17 @@ yarn start
 ```
 # Download the Expo app for Android.
 You can select to run the app on your phone or emulator.
+
+# Download the App:
+Just want to see the app? 
+[Open the project in a browser or your expo app](https://expo.io/@atkdf/MyCards)
+
+## Production build (Android)
+```bash
+cd MyCards
+yarn install
+expo-cli build:android
+```
 
 ## Create React Native App
 
