@@ -1,4 +1,4 @@
-****#MyCards: FlashCard Project
+# MyCards: FlashCard Project
 
 ![copyright](https://img.shields.io/badge/%C2%A9%202019-Andrea%20Kostakis-blue.svg)
 ![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)
